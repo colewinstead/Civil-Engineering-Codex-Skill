@@ -1,0 +1,14 @@
+# Public documentation only. Source repositories, datasets, binaries, local
+# configuration, credentials, editor files, caches, and temporary files stay out.
+*
+!.gitignore
+!SKILL.md
+!README.md
+!references/
+!references/*.md
+
+# Defense in depth for accidentally named local Markdown documents.
+references/private*
+references/local*
+references/secrets*
+references/*~

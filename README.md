@@ -46,7 +46,7 @@ ls -ld "$skill_link"
 readlink "$skill_link"
 ```
 
-On Windows, use PowerShell:
+On Windows, use a regular PowerShell session. A directory junction links the checkout into your personal skills folder without administrator privileges or Developer Mode:
 
 ```powershell
 $skillRepo = (Get-Location).Path
@@ -55,14 +55,14 @@ New-Item -ItemType Directory -Force (Join-Path $HOME '.agents\skills') | Out-Nul
 if (Get-Item -LiteralPath $skillLink -Force -ErrorAction SilentlyContinue) {
     Write-Output "Inspect the existing installation before changing it: $skillLink"
 } else {
-    New-Item -ItemType SymbolicLink -Path $skillLink -Target $skillRepo -ErrorAction Stop
+    New-Item -ItemType Junction -Path $skillLink -Target $skillRepo -ErrorAction Stop
 }
 Get-Item -LiteralPath $skillLink -Force | Select-Object FullName, LinkType, Target
 ```
 
-Windows symbolic-link creation requires Developer Mode or an administrator PowerShell session. If access is denied, reopen PowerShell as administrator, return to the repository root, and rerun the commands.
+Keep the Windows checkout on a local drive; directory junctions do not support network-share targets. If you prefer a symbolic link, replace `Junction` with `SymbolicLink`; that option requires Developer Mode or an administrator PowerShell session.
 
-The checkout is the only maintained copy; pulling or editing it updates the installed skill through the symlink. Keep it at a stable path. Reopen or restart Codex if discovery has not refreshed. The user location and symlink support follow [Codex skill documentation](https://learn.chatgpt.com/docs/build-skills#where-codex-loads-local-skills). When migrating an existing installation, inspect and remove its superseded link rather than keeping duplicate installations.
+The checkout is the only maintained copy; pulling or editing it updates the installed skill through the symbolic link or junction. Keep it at a stable path. Reopen or restart Codex if discovery has not refreshed. The user location and symlink support follow [Codex skill documentation](https://learn.chatgpt.com/docs/build-skills#where-codex-loads-local-skills). When migrating an existing installation, inspect and remove its superseded link rather than keeping duplicate installations.
 
 ## Evidence and authority
 

@@ -12,6 +12,7 @@ Sources: RS-FIELD, RS-CRS, FP-META, FP-EXPORT.
 
 ## Photograph/location associations
 
+- **[Application/purpose; FP-META, RS-CRS]** Field Photo Mapper associates existing photo geotags with maps and documentation; RoadStation transforms live positions into project coordinates for station/offset calculations. Their spatial workflows therefore need different checks: project-CRS/operation validation is essential to RoadStation but is outside the reviewed photo mapper's scope. This explains the workflow difference, not missing basic coordinate validation; both still need valid geographic coordinates and honest accuracy limits.
 - **[Safeguard; FP-META]** Preserve the original file association, extraction status, and available time/location metadata. A failed image preview need not invalidate successfully extracted coordinates. A missing geotag must not become `(0,0)`; conversely, legitimate zero latitude or longitude must not be treated as absent.
 - **[Safeguard]** Validate finite latitude/longitude and their geographic ranges. Do not coerce empty strings into zero. The reviewed photo normalizers do not provide comprehensive range checks or measured accuracy metadata; treat these as gaps, not established safeguards.
 - **[Assumption]** EXIF timestamps may lack time zones. Keep that uncertainty and distinguish original capture time from create/modify fallbacks. Do not silently convert an unzoned local timestamp into an asserted UTC capture time.

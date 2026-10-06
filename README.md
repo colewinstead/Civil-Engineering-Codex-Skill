@@ -29,7 +29,9 @@ Codex first sees the name and description. When selected, it reads the small [SK
 
 ## Install globally from one canonical checkout
 
-Clone this repository to your chosen location, or use an existing checkout. From its root, run:
+Clone this repository to your chosen location, or use an existing checkout. From its root, run the commands for your operating system.
+
+On macOS or Linux:
 
 ```sh
 skill_repo="$(pwd -P)"
@@ -43,6 +45,22 @@ fi
 ls -ld "$skill_link"
 readlink "$skill_link"
 ```
+
+On Windows, use PowerShell:
+
+```powershell
+$skillRepo = (Get-Location).Path
+$skillLink = Join-Path $HOME '.agents\skills\civil-engineering'
+New-Item -ItemType Directory -Force (Join-Path $HOME '.agents\skills') | Out-Null
+if (Get-Item -LiteralPath $skillLink -Force -ErrorAction SilentlyContinue) {
+    Write-Output "Inspect the existing installation before changing it: $skillLink"
+} else {
+    New-Item -ItemType SymbolicLink -Path $skillLink -Target $skillRepo -ErrorAction Stop
+}
+Get-Item -LiteralPath $skillLink -Force | Select-Object FullName, LinkType, Target
+```
+
+Windows symbolic-link creation requires Developer Mode or an administrator PowerShell session. If access is denied, reopen PowerShell as administrator, return to the repository root, and rerun the commands.
 
 The checkout is the only maintained copy; pulling or editing it updates the installed skill through the symlink. Keep it at a stable path. Reopen or restart Codex if discovery has not refreshed. The user location and symlink support follow [Codex skill documentation](https://learn.chatgpt.com/docs/build-skills#where-codex-loads-local-skills). When migrating an existing installation, inspect and remove its superseded link rather than keeping duplicate installations.
 

@@ -1,4 +1,4 @@
-# Civil Engineering for Codex
+# Civil Engineering for Codex — v1.1
 
 A global Codex skill for civil-engineering reasoning, calculation review, and engineering software validation. It captures reusable lessons from six working civil/geospatial software projects without distributing their private datasets or copying their source code.
 
@@ -20,7 +20,7 @@ Coverage reflects reviewed implementations. It is not a comprehensive design man
 Invoke it explicitly in Codex:
 
 ```text
-$civil-engineering Review this station/offset calculation and its unit handling.
+$civil-engineering-codex-skill Review this station/offset calculation and its unit handling.
 ```
 
 Automatic selection is enabled by default. The description targets engineering behavior, analysis, and validation; purely visual UI edits and generic programming should not activate it. Selection is contextual, not a guaranteed keyword match.
@@ -33,8 +33,8 @@ Clone this repository to your chosen location, or use an existing checkout. From
 
 ```sh
 skill_repo="$(pwd -P)"
-skill_link="$HOME/.codex/skills/civil-engineering"
-mkdir -p "$HOME/.codex/skills"
+skill_link="$HOME/.agents/skills/civil-engineering"
+mkdir -p "$HOME/.agents/skills"
 if [ -e "$skill_link" ] || [ -L "$skill_link" ]; then
   printf 'Inspect the existing installation before changing it: %s\n' "$skill_link"
 else
@@ -44,9 +44,7 @@ ls -ld "$skill_link"
 readlink "$skill_link"
 ```
 
-The repository remains the only copy. The symlink exposes its root `SKILL.md` globally; pulling or editing the checkout changes the installed content immediately. Keep the checkout at a stable path, and reopen the Codex session if its skill catalog has not refreshed. Moving the checkout requires updating the link after inspecting the old installation.
-
-This installation path was verified with the installed Codex build during creation. Skill search locations can differ by release; current [Codex skill documentation](https://developers.openai.com/codex/skills) also documents the user-level `.agents/skills` location and symlink support. Verify discovery in your build before choosing a different location; do not create a second independent copy.
+The checkout is the only maintained copy; pulling or editing it updates the installed skill through the symlink. Keep it at a stable path. Reopen or restart Codex if discovery has not refreshed. The user location and symlink support follow [Codex skill documentation](https://learn.chatgpt.com/docs/build-skills#where-codex-loads-local-skills). When migrating an existing installation, inspect and remove its superseded link rather than keeping duplicate installations.
 
 ## Evidence and authority
 
@@ -64,4 +62,8 @@ This skill does not replace governing standards, engineering judgment, project s
 4. Verify equations, dimensions, applicability, and numerical examples. Preserve independently validated baselines and quantify differences.
 5. Review the entire Git diff for private data, copied manual content, unsupported authority claims, and unnecessary duplication; then commit the reviewed files.
 
-The Git allowlist admits the entrypoint, README, ignore file, and reference Markdown only. It is a convenience, not a secret scanner: never add private project data, client identifiers, credentials, original photographs, or proprietary source code. Synthetic examples should preserve the relevant failure mode without reproducing a real project.
+Use [trigger cases](evals/trigger-cases.md) to review automatic selection after description changes. They are human-readable expectations, not a claim of measured trigger accuracy.
+
+The Git allowlist admits the entrypoint, README, ignore file, license, and reference/evaluation Markdown only. It is a convenience, not a secret scanner: never add private project data, client identifiers, credentials, original photographs, or proprietary source code. Synthetic examples should preserve the relevant failure mode without reproducing a real project.
+
+Licensed under the [MIT License](LICENSE).

@@ -4,11 +4,18 @@
 !.gitignore
 !SKILL.md
 !README.md
+!LICENSE
 !references/
 !references/*.md
+!evals/
+!evals/*.md
 
 # Defense in depth for accidentally named local Markdown documents.
 references/private*
 references/local*
 references/secrets*
 references/*~
+evals/private*
+evals/local*
+evals/secrets*
+evals/*~

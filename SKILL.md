@@ -1,6 +1,6 @@
 ---
-name: civil-engineering
-description: Apply civil and transportation engineering knowledge to calculations, design analysis, and engineering software QA. Use for roadway or highway geometry, horizontal/vertical alignments, station/offset, superelevation, guardrail/roadside design, drainage/stormwater hydraulics and hydrology, surveying/GNSS/GPS, CRS/EPSG/State Plane and datum transformations, LandXML, terrain/GeoTIFF, field mapping, and engineering GIS/CAD interoperability with QGIS, Civil 3D, OpenRoads Designer, GDAL, or PROJ. Exclude purely visual UI, ordinary prose, Git, and generic programming changes that cannot affect engineering behavior.
+name: civil-engineering-codex-skill
+description: Review civil-engineering calculations and engineering software for technical correctness. Use for roadway geometry/stationing, superelevation, guardrail calculations, culvert hydraulics, CRS/GNSS, LandXML, terrain/GeoTIFF, and civil CAD/GIS interoperability. Exclude visual UI, Git, prose, and generic code changes with no engineering impact.
 ---
 
 # Civil engineering
